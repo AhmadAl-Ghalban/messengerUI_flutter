@@ -51,26 +51,177 @@ class MessengerScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Container(
-            padding: EdgeInsets.all(5.0),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5.0),
-                color: Colors.grey[300]),
-            child: Row(
-              children: [
-                Icon(Icons.search),
-                SizedBox(
-                  width: 15.0,
-                ),
-                Text('Search')
-              ],
+        child: SingleChildScrollView(
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Container(
+              padding: EdgeInsets.all(5.0),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5.0),
+                  color: Colors.grey[300]),
+              child: Row(
+                children: [
+                  Icon(Icons.search),
+                  SizedBox(
+                    width: 15.0,
+                  ),
+                  Text('Search')
+                ],
+              ),
             ),
-          ),
-          SizedBox(
-            height: 10.0,
-          ),
-          SingleChildScrollView(
+            SizedBox(
+              height: 10.0,
+            ),
+              Container(
+          height: 100,
+          child: ListView.builder(shrinkWrap: true,scrollDirection: Axis.horizontal,itemBuilder:(context,index){
+        return buildStoryItem();
+        
+          } ,itemCount: 10,),
+              ) 
+          ,
+          ListView.separated(physics:NeverScrollableScrollPhysics() ,shrinkWrap: true,itemBuilder: (context,index)=>buildChatItem(), separatorBuilder: (context,index)=>SizedBox(height: 10), itemCount: 10)
+          ]),
+        ),
+      ),
+    );
+  }
+
+
+//arrow function
+Widget buildChatItem()=>Row(
+                    children: [
+                      Stack(
+                        alignment: AlignmentDirectional.bottomEnd,
+
+                        // ignore: prefer_const_literals_to_create_immutables
+
+                        children: [
+                          CircleAvatar(
+                            radius: 25.0,
+                            backgroundImage: NetworkImage(
+                                'https://www.arabnews.com/sites/default/files/2022/05/04/3210266-913534187.jpg'),
+                          ),
+
+                          //                  CircleAvatar(
+
+                          // radius: 8.0,
+
+                          // backgroundColor: Colors.white,
+
+                          //               ),
+
+                          Padding(
+                            padding: EdgeInsetsDirectional.only(
+                                end: 3.0, bottom: 5.0),
+                            child: CircleAvatar(
+                              radius: 7.0,
+                              backgroundColor: Colors.red,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        width: 20.0,
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Ahmad Alghalban',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              height: 5.0,
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                    child: Text(
+                                  'Im Ahmad Alghalban and i live in Jordan',
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 2,
+                                )),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 5.0),
+                                  child: Container(
+                                    width: 7.0,
+                                    height: 7.0,
+                                    decoration: BoxDecoration(
+                                        color: Colors.blue,
+                                        shape: BoxShape.circle),
+                                  ),
+                                ),
+                                Text('02:10 pm')
+                              ],
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  );
+
+Widget buildStoryItem()=>  Container(
+                  width: 60.0,
+                  child: Column(
+                    children: [
+                      Stack(
+                        alignment: AlignmentDirectional.bottomEnd,
+
+                        // ignore: prefer_const_literals_to_create_immutables
+
+                        children: [
+                          CircleAvatar(
+                            radius: 25.0,
+                            backgroundImage: NetworkImage(
+                                'https://www.arabnews.com/sites/default/files/2022/05/04/3210266-913534187.jpg'),
+                          ),
+
+                          //                  CircleAvatar(
+
+                          // radius: 8.0,
+
+                          // backgroundColor: Colors.white,
+
+                          //               ),
+
+                          Padding(
+                            padding: EdgeInsetsDirectional.only(
+                                end: 3.0, bottom: 5.0),
+                            child: CircleAvatar(
+                              radius: 7.0,
+                              backgroundColor: Colors.red,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 4.0,
+                      ),
+                      Text(
+                        'Ahmad Alghalban',
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      )
+                    ],
+                  ),
+                );
+
+}
+
+
+
+
+
+/*
+
+
+
+   SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
@@ -403,26 +554,27 @@ class MessengerScreen extends StatelessWidget {
                     children: [
                       Stack(
                         alignment: AlignmentDirectional.bottomEnd,
-                      
+
                         // ignore: prefer_const_literals_to_create_immutables
-                      
+
                         children: [
                           CircleAvatar(
                             radius: 25.0,
                             backgroundImage: NetworkImage(
                                 'https://www.arabnews.com/sites/default/files/2022/05/04/3210266-913534187.jpg'),
                           ),
-                      
+
                           //                  CircleAvatar(
-                      
+
                           // radius: 8.0,
-                      
+
                           // backgroundColor: Colors.white,
-                      
+
                           //               ),
-                      
+
                           Padding(
-                            padding: EdgeInsetsDirectional.only(end: 3.0, bottom: 5.0),
+                            padding: EdgeInsetsDirectional.only(
+                                end: 3.0, bottom: 5.0),
                             child: CircleAvatar(
                               radius: 7.0,
                               backgroundColor: Colors.red,
@@ -441,8 +593,8 @@ class MessengerScreen extends StatelessWidget {
                               'Ahmad Alghalban',
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style:
-                                  TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
                             ),
                             SizedBox(
                               height: 5.0,
@@ -456,12 +608,14 @@ class MessengerScreen extends StatelessWidget {
                                   maxLines: 2,
                                 )),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 5.0),
                                   child: Container(
                                     width: 7.0,
                                     height: 7.0,
                                     decoration: BoxDecoration(
-                                        color: Colors.blue, shape: BoxShape.circle),
+                                        color: Colors.blue,
+                                        shape: BoxShape.circle),
                                   ),
                                 ),
                                 Text('02:10 pm')
@@ -479,26 +633,27 @@ class MessengerScreen extends StatelessWidget {
                     children: [
                       Stack(
                         alignment: AlignmentDirectional.bottomEnd,
-                      
+
                         // ignore: prefer_const_literals_to_create_immutables
-                      
+
                         children: [
                           CircleAvatar(
                             radius: 25.0,
                             backgroundImage: NetworkImage(
                                 'https://www.arabnews.com/sites/default/files/2022/05/04/3210266-913534187.jpg'),
                           ),
-                      
+
                           //                  CircleAvatar(
-                      
+
                           // radius: 8.0,
-                      
+
                           // backgroundColor: Colors.white,
-                      
+
                           //               ),
-                      
+
                           Padding(
-                            padding: EdgeInsetsDirectional.only(end: 3.0, bottom: 5.0),
+                            padding: EdgeInsetsDirectional.only(
+                                end: 3.0, bottom: 5.0),
                             child: CircleAvatar(
                               radius: 7.0,
                               backgroundColor: Colors.red,
@@ -517,8 +672,8 @@ class MessengerScreen extends StatelessWidget {
                               'Ahmad Alghalban',
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style:
-                                  TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
                             ),
                             SizedBox(
                               height: 5.0,
@@ -532,12 +687,14 @@ class MessengerScreen extends StatelessWidget {
                                   maxLines: 2,
                                 )),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 5.0),
                                   child: Container(
                                     width: 7.0,
                                     height: 7.0,
                                     decoration: BoxDecoration(
-                                        color: Colors.blue, shape: BoxShape.circle),
+                                        color: Colors.blue,
+                                        shape: BoxShape.circle),
                                   ),
                                 ),
                                 Text('02:10 pm')
@@ -548,33 +705,34 @@ class MessengerScreen extends StatelessWidget {
                       )
                     ],
                   ),
-                           SizedBox(
+                  SizedBox(
                     height: 15,
                   ),
                   Row(
                     children: [
                       Stack(
                         alignment: AlignmentDirectional.bottomEnd,
-                      
+
                         // ignore: prefer_const_literals_to_create_immutables
-                      
+
                         children: [
                           CircleAvatar(
                             radius: 25.0,
                             backgroundImage: NetworkImage(
                                 'https://www.arabnews.com/sites/default/files/2022/05/04/3210266-913534187.jpg'),
                           ),
-                      
+
                           //                  CircleAvatar(
-                      
+
                           // radius: 8.0,
-                      
+
                           // backgroundColor: Colors.white,
-                      
+
                           //               ),
-                      
+
                           Padding(
-                            padding: EdgeInsetsDirectional.only(end: 3.0, bottom: 5.0),
+                            padding: EdgeInsetsDirectional.only(
+                                end: 3.0, bottom: 5.0),
                             child: CircleAvatar(
                               radius: 7.0,
                               backgroundColor: Colors.red,
@@ -593,8 +751,8 @@ class MessengerScreen extends StatelessWidget {
                               'Ahmad Alghalban',
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style:
-                                  TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
                             ),
                             SizedBox(
                               height: 5.0,
@@ -608,12 +766,14 @@ class MessengerScreen extends StatelessWidget {
                                   maxLines: 2,
                                 )),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 5.0),
                                   child: Container(
                                     width: 7.0,
                                     height: 7.0,
                                     decoration: BoxDecoration(
-                                        color: Colors.blue, shape: BoxShape.circle),
+                                        color: Colors.blue,
+                                        shape: BoxShape.circle),
                                   ),
                                 ),
                                 Text('02:10 pm')
@@ -624,33 +784,34 @@ class MessengerScreen extends StatelessWidget {
                       )
                     ],
                   ),
-                           SizedBox(
+                  SizedBox(
                     height: 15,
                   ),
                   Row(
                     children: [
                       Stack(
                         alignment: AlignmentDirectional.bottomEnd,
-                      
+
                         // ignore: prefer_const_literals_to_create_immutables
-                      
+
                         children: [
                           CircleAvatar(
                             radius: 25.0,
                             backgroundImage: NetworkImage(
                                 'https://www.arabnews.com/sites/default/files/2022/05/04/3210266-913534187.jpg'),
                           ),
-                      
+
                           //                  CircleAvatar(
-                      
+
                           // radius: 8.0,
-                      
+
                           // backgroundColor: Colors.white,
-                      
+
                           //               ),
-                      
+
                           Padding(
-                            padding: EdgeInsetsDirectional.only(end: 3.0, bottom: 5.0),
+                            padding: EdgeInsetsDirectional.only(
+                                end: 3.0, bottom: 5.0),
                             child: CircleAvatar(
                               radius: 7.0,
                               backgroundColor: Colors.red,
@@ -669,8 +830,8 @@ class MessengerScreen extends StatelessWidget {
                               'Ahmad Alghalban',
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style:
-                                  TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
                             ),
                             SizedBox(
                               height: 5.0,
@@ -684,12 +845,14 @@ class MessengerScreen extends StatelessWidget {
                                   maxLines: 2,
                                 )),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 5.0),
                                   child: Container(
                                     width: 7.0,
                                     height: 7.0,
                                     decoration: BoxDecoration(
-                                        color: Colors.blue, shape: BoxShape.circle),
+                                        color: Colors.blue,
+                                        shape: BoxShape.circle),
                                   ),
                                 ),
                                 Text('02:10 pm')
@@ -700,33 +863,34 @@ class MessengerScreen extends StatelessWidget {
                       )
                     ],
                   ),
-                           SizedBox(
+                  SizedBox(
                     height: 15,
                   ),
                   Row(
                     children: [
                       Stack(
                         alignment: AlignmentDirectional.bottomEnd,
-                      
+
                         // ignore: prefer_const_literals_to_create_immutables
-                      
+
                         children: [
                           CircleAvatar(
                             radius: 25.0,
                             backgroundImage: NetworkImage(
                                 'https://www.arabnews.com/sites/default/files/2022/05/04/3210266-913534187.jpg'),
                           ),
-                      
+
                           //                  CircleAvatar(
-                      
+
                           // radius: 8.0,
-                      
+
                           // backgroundColor: Colors.white,
-                      
+
                           //               ),
-                      
+
                           Padding(
-                            padding: EdgeInsetsDirectional.only(end: 3.0, bottom: 5.0),
+                            padding: EdgeInsetsDirectional.only(
+                                end: 3.0, bottom: 5.0),
                             child: CircleAvatar(
                               radius: 7.0,
                               backgroundColor: Colors.red,
@@ -745,8 +909,8 @@ class MessengerScreen extends StatelessWidget {
                               'Ahmad Alghalban',
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style:
-                                  TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
                             ),
                             SizedBox(
                               height: 5.0,
@@ -760,12 +924,14 @@ class MessengerScreen extends StatelessWidget {
                                   maxLines: 2,
                                 )),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 5.0),
                                   child: Container(
                                     width: 7.0,
                                     height: 7.0,
                                     decoration: BoxDecoration(
-                                        color: Colors.blue, shape: BoxShape.circle),
+                                        color: Colors.blue,
+                                        shape: BoxShape.circle),
                                   ),
                                 ),
                                 Text('02:10 pm')
@@ -776,33 +942,34 @@ class MessengerScreen extends StatelessWidget {
                       )
                     ],
                   ),
-                           SizedBox(
+                  SizedBox(
                     height: 15,
                   ),
                   Row(
                     children: [
                       Stack(
                         alignment: AlignmentDirectional.bottomEnd,
-                      
+
                         // ignore: prefer_const_literals_to_create_immutables
-                      
+
                         children: [
                           CircleAvatar(
                             radius: 25.0,
                             backgroundImage: NetworkImage(
                                 'https://www.arabnews.com/sites/default/files/2022/05/04/3210266-913534187.jpg'),
                           ),
-                      
+
                           //                  CircleAvatar(
-                      
+
                           // radius: 8.0,
-                      
+
                           // backgroundColor: Colors.white,
-                      
+
                           //               ),
-                      
+
                           Padding(
-                            padding: EdgeInsetsDirectional.only(end: 3.0, bottom: 5.0),
+                            padding: EdgeInsetsDirectional.only(
+                                end: 3.0, bottom: 5.0),
                             child: CircleAvatar(
                               radius: 7.0,
                               backgroundColor: Colors.red,
@@ -821,8 +988,8 @@ class MessengerScreen extends StatelessWidget {
                               'Ahmad Alghalban',
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style:
-                                  TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
                             ),
                             SizedBox(
                               height: 5.0,
@@ -836,12 +1003,14 @@ class MessengerScreen extends StatelessWidget {
                                   maxLines: 2,
                                 )),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 5.0),
                                   child: Container(
                                     width: 7.0,
                                     height: 7.0,
                                     decoration: BoxDecoration(
-                                        color: Colors.blue, shape: BoxShape.circle),
+                                        color: Colors.blue,
+                                        shape: BoxShape.circle),
                                   ),
                                 ),
                                 Text('02:10 pm')
@@ -852,33 +1021,34 @@ class MessengerScreen extends StatelessWidget {
                       )
                     ],
                   ),
-                           SizedBox(
+                  SizedBox(
                     height: 15,
                   ),
                   Row(
                     children: [
                       Stack(
                         alignment: AlignmentDirectional.bottomEnd,
-                      
+
                         // ignore: prefer_const_literals_to_create_immutables
-                      
+
                         children: [
                           CircleAvatar(
                             radius: 25.0,
                             backgroundImage: NetworkImage(
                                 'https://www.arabnews.com/sites/default/files/2022/05/04/3210266-913534187.jpg'),
                           ),
-                      
+
                           //                  CircleAvatar(
-                      
+
                           // radius: 8.0,
-                      
+
                           // backgroundColor: Colors.white,
-                      
+
                           //               ),
-                      
+
                           Padding(
-                            padding: EdgeInsetsDirectional.only(end: 3.0, bottom: 5.0),
+                            padding: EdgeInsetsDirectional.only(
+                                end: 3.0, bottom: 5.0),
                             child: CircleAvatar(
                               radius: 7.0,
                               backgroundColor: Colors.red,
@@ -897,8 +1067,8 @@ class MessengerScreen extends StatelessWidget {
                               'Ahmad Alghalban',
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style:
-                                  TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
                             ),
                             SizedBox(
                               height: 5.0,
@@ -912,12 +1082,14 @@ class MessengerScreen extends StatelessWidget {
                                   maxLines: 2,
                                 )),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 5.0),
                                   child: Container(
                                     width: 7.0,
                                     height: 7.0,
                                     decoration: BoxDecoration(
-                                        color: Colors.blue, shape: BoxShape.circle),
+                                        color: Colors.blue,
+                                        shape: BoxShape.circle),
                                   ),
                                 ),
                                 Text('02:10 pm')
@@ -928,33 +1100,34 @@ class MessengerScreen extends StatelessWidget {
                       )
                     ],
                   ),
-                           SizedBox(
+                  SizedBox(
                     height: 15,
                   ),
                   Row(
                     children: [
                       Stack(
                         alignment: AlignmentDirectional.bottomEnd,
-                      
+
                         // ignore: prefer_const_literals_to_create_immutables
-                      
+
                         children: [
                           CircleAvatar(
                             radius: 25.0,
                             backgroundImage: NetworkImage(
                                 'https://www.arabnews.com/sites/default/files/2022/05/04/3210266-913534187.jpg'),
                           ),
-                      
+
                           //                  CircleAvatar(
-                      
+
                           // radius: 8.0,
-                      
+
                           // backgroundColor: Colors.white,
-                      
+
                           //               ),
-                      
+
                           Padding(
-                            padding: EdgeInsetsDirectional.only(end: 3.0, bottom: 5.0),
+                            padding: EdgeInsetsDirectional.only(
+                                end: 3.0, bottom: 5.0),
                             child: CircleAvatar(
                               radius: 7.0,
                               backgroundColor: Colors.red,
@@ -973,8 +1146,8 @@ class MessengerScreen extends StatelessWidget {
                               'Ahmad Alghalban',
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style:
-                                  TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
                             ),
                             SizedBox(
                               height: 5.0,
@@ -988,12 +1161,14 @@ class MessengerScreen extends StatelessWidget {
                                   maxLines: 2,
                                 )),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 5.0),
                                   child: Container(
                                     width: 7.0,
                                     height: 7.0,
                                     decoration: BoxDecoration(
-                                        color: Colors.blue, shape: BoxShape.circle),
+                                        color: Colors.blue,
+                                        shape: BoxShape.circle),
                                   ),
                                 ),
                                 Text('02:10 pm')
@@ -1008,8 +1183,5 @@ class MessengerScreen extends StatelessWidget {
               ),
             ),
           ),
-        ]),
-      ),
-    );
-  }
-}
+
+*/
