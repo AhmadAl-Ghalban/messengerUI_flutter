@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:messenger/counterScreen.dart';
 import 'package:messenger/messenger.dart';
+import 'package:messenger/userScreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,8 +15,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+debugShowCheckedModeBanner: false,
+      // home: MessengerScreen(),
+            // home: UsersScreen(),
+            home:CounterScreen(),
 
-      home: MessengerScreen(),
     );
   }
 }
